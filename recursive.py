@@ -38,10 +38,37 @@ def find_max(ll: []):
         return temp
 
 
+def binary_search(arr: [], low: int, high: int, x: int):
+    if not arr or x is None or high is None or low is None:
+        return None
+
+    mid = (high + low) // 2
+    if arr[mid] == x:
+        return mid
+    elif arr[mid] > x:
+        return binary_search(arr, low, mid, x)
+    else:
+        return binary_search(arr, mid+1, high, x)
+
+def quicksort(arr: []):
+    if len(arr) < 2:
+        return arr
+    pivot = arr[0]
+    smaller = [i for i in arr[1:] if i <= pivot ]
+    bigger = [i for i in arr[1:] if i > pivot ]
+    return quicksort(smaller) + [pivot] + quicksort(bigger)
+
 print("countdown")
 countdown(10)
 print("factorial {}:".format(5), fact(5))
 print("sum n {}:".format(5), sum_n(5))
-lll = [1, 2, 100, 4, 7, 14, -1]
+lll = [5, 2, 100, 4, 7, 14, -1]
 print("count list {}:".format(lll), count_list(lll))
 print("find max {}:".format(lll), find_max(lll))
+
+llx = quicksort(lll)
+print("quicksort {}:".format(lll), llx)
+
+print("binary search {} in {}:".format(7, llx), binary_search(llx, 0, len(llx)-1, 7))
+
+
